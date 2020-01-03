@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
+ * 代理，客户端都是通过该接口来实现调用的
  * Created by chenyangli.
  */
 public class RpcProxy implements InvocationHandler {
@@ -29,6 +30,7 @@ public class RpcProxy implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args)
             throws Throwable {
+    	//调用委托给RpcClient
         RpcResponse response = (RpcResponse) client.call(clazz, method, args);
         return response.getResult();
     }

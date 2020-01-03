@@ -39,7 +39,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
      * key:     service Id        (interface name)
      * value:   concrete handler  (Spring bean)
      */
-    private Map<String, Object> handlerMap = new HashMap<String, Object>();
+    private Map<String, Object> handlerMap = new HashMap<>();
 
     public RpcServer(String serverAddress, ServiceRegistry registry) {
         this.serverAddress = serverAddress;
@@ -48,6 +48,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
 
     public void setApplicationContext(ApplicationContext applicationContext)
             throws BeansException {
+    	//从spring容器中获取到提供rcp服务的类
         Map<String, Object> serviceMap = applicationContext.getBeansWithAnnotation(RpcService.class);
         if (MapUtils.isNotEmpty(serviceMap)) {
             for (Object bean : serviceMap.values()) {
@@ -58,11 +59,15 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
     }
 
     public void afterPropertiesSet() throws Exception {
+    	//初始化注册中心
         registry.init();
         bootstrap();
     }
 
-    public void bootstrap() {
+	/**
+	 * 启动服务
+	 */
+	private void bootstrap() {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -87,6 +92,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
 
             ChannelFuture future = bootstrap.bind(new InetSocketAddress(port)).sync();
 
+            //往注册中心注册服务地址
             registry.register(host, port);
 
             System.out.println("buddha rpc server start successfully, listening on port: " + port);

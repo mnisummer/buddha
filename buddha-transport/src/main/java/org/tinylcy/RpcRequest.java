@@ -10,10 +10,15 @@ public class RpcRequest implements BasicMessage {
 
     private static final AtomicLong REQUEST_ID = new AtomicLong(1L);
 
-    private Long requestId;
+	/** 请求id */
+	private Long requestId;
+	/** 类名 */
     private String className;
+	/** 方法名 */
     private String methodName;
+	/** 参数类型 */
     private Class<?>[] paramTypes;
+	/** 参数 */
     private Object[] params;
 
     public RpcRequest() {

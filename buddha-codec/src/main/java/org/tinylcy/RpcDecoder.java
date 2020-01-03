@@ -7,6 +7,7 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 import java.util.List;
 
 /**
+ * 解码器
  * Created by chenyangli.
  */
 public class RpcDecoder extends ByteToMessageDecoder {

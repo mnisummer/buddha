@@ -70,18 +70,16 @@ public class ZooKeeperManager {
 
     public List<String> listChildren(String nodePath) {
         checkGroupPath(nodePath);
-        List<String> result = new ArrayList<String>();
-        try {
-            List<String> children = zk.getChildren(nodePath, true);
-            for (String c : children) {
-                result.add(c);
-            }
-            zk.close();
-        } catch (KeeperException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        List<String> result = new ArrayList<>();
+	    try {
+		    List<String> children = zk.getChildren(nodePath, true);
+		    result.addAll(children);
+		    zk.close();
+	    } catch (KeeperException e) {
+		    e.printStackTrace();
+	    } catch (InterruptedException e) {
+		    e.printStackTrace();
+	    }
         return result;
     }
 

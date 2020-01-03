@@ -17,6 +17,7 @@ public class ServiceRegistry {
     }
 
     /**
+     * 注册服务
      * Service format -> host:port
      *
      * @param host

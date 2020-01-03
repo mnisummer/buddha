@@ -17,6 +17,8 @@ public class RpcClientHandler extends SimpleChannelInboundHandler<RpcResponse> {
     @Override
     protected void channelRead0(ChannelHandlerContext context, RpcResponse resp)
             throws Exception {
+    	//经过之前解码器的解码后，这里能拿到响应对象resp
+	    //将返回的响应内容拷贝至response
         System.out.println("RpcClientHandler - response: " + resp);
         response.setRequestId(resp.getRequestId());
         response.setError(resp.getError());

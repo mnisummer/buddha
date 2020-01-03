@@ -4,8 +4,10 @@ package org.tinylcy;
  * Created by chenyangli.
  */
 public class RpcResponse implements BasicMessage {
+	/** 表明该响应是对应哪个请求的 */
     private Long requestId;
     private Throwable error;
+    /** 响应结果 */
     private Object result;
 
     public Long getRequestId() {

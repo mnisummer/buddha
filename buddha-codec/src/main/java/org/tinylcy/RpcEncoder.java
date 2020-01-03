@@ -5,6 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
 /**
+ * 编码器
  * Created by chenyangli.
  */
 public class RpcEncoder extends MessageToByteEncoder {

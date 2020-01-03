@@ -18,7 +18,11 @@ public class ServiceDiscovery {
         this.manager = manager;
     }
 
-    public String discover() {
+	/**
+	 * 发现服务
+	 * @return
+	 */
+	public String discover() {
         manager.connect();
         List<String> services = manager.listChildren(ZooKeeperManager.ZK_REGISTRY_PATH);
         int size = services.size();
